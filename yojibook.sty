@@ -1,0 +1,91 @@
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{yojibook}
+
+\usepackage[paperheight=74mm,paperwidth=52mm]{geometry}
+\usepackage{xeCJK}
+\usepackage{fontspec}
+\usepackage{anyfontsize}
+\usepackage{hyperref}
+\usepackage{graphicx} %%for logo on last page
+
+\usepackage{xltxtra, setspace}
+\usepackage{fancyhdr}%%for custom numbers at foot
+\usepackage{xifthen}  %%for custom numbers at foot
+
+\pagestyle{fancy}  
+\renewcommand{\headrulewidth}{0pt}%%gets rid of weird line at top of page
+
+\setCJKmainfont{ipaexg.ttf}
+\setCJKfamilyfont{cjk-vert}[Script=CJK,RawFeature=vertical]{ipaexg.ttf}  %% sans
+%\setCJKfamilyfont{cjk-vert}[Script=CJK,RawFeature=vertical]{KanjiStrokeOrders}  %% for tracing 
+%\setCJKfamilyfont{cjk-vert}[Script=CJK,RawFeature=vertical]{ipam.ttf}  %% serif
+%\setCJKfamilyfont{cjk-vert}[Script=CJK,RawFeature=vertical]{ipaexm.ttf}  %% serif\setCJKfamilyfont{cjk-vert}[Script=CJK,RawFeature=vertical]{ipag.ttf}  %% sans
+%\setCJKfamilyfont{cjk-vert}[Script=CJK,RawFeature=vertical]{ipamp.ttf}  %% sans
+
+
+
+\fontsize{24}{24}
+
+
+
+\newcounter{mycounter}
+\cfoot{ \ifthenelse {\isodd {\value{page}}\and \value{page}>1}{\themycounter}{}}
+
+%\newcommand{\stick}{\rotatebox[origin=br]{90}{\raisebox{0ex}{ー}}}
+%%\newcommand{\stick}{\scalebox{-1}[1]{\rotatebox[origin=c]{90}{ー}\hspace{0.75em}}}
+\newcommand{\stick}{\CJKfamily{cjk-vert}{一}}
+
+\newcommand{\definitionpage}[4]
+%%% 1. kanji, 2. hiragana, 3. definition, 4. optional notes
+{
+\newpage
+\CJKfamily{Script=CJK}
+\stepcounter{mycounter}
+\fontsize{11}{11}
+\noindent
+#2
+\newline
+\newline
+#3
+\newline
+\newline
+#4
+\yojipage{#1}
+}
+
+
+\newcommand{\yojipage}[1]
+{
+\begin{center}
+\newpage
+
+\fontsize{36}{36}
+\begin{minipage}{0.5\textwidth}
+%\begin{spacing}{1.125}
+#1
+%\end{spacing}
+\end{minipage}
+\end{center}
+}
+
+
+\newcommand{\signaturepadding} 
+%% adds pages to pad out the final signature
+{
+\whiledo
+{ \not\value{mycounter}=15 \and  \not\value{mycounter}=31 \and \not\value{mycounter}=47 \and  \not\value{mycounter}=63}
+{\newpage * \stepcounter{mycounter}}
+}
+
+\newcommand{\finalpage}
+{
+\newpage
+\pagenumbering{gobble}
+\fontsize{11}{11}
+\vspace*{\fill}
+\noindent
+\begin{center}
+\includegraphics[scale=0.1]{coneko}\\
+Another little book by Coneko Press
+\end{center}
+}
