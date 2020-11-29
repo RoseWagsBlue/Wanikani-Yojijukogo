@@ -9,10 +9,9 @@
 \usepackage{anyfontsize}
 \usepackage{hyperref}
 \usepackage{graphicx} %%for logo on last page
-
-\usepackage{xltxtra, setspace}
 \usepackage{fancyhdr}%%for custom numbers at foot
 \usepackage{xifthen}  %%for custom numbers at foot
+\usepackage{setspace}
 
 \pagestyle{fancy}  
 \renewcommand{\headrulewidth}{0pt}%%gets rid of weird line at top of page
@@ -25,19 +24,10 @@
 %\setCJKfamilyfont{cjk-vert}[Script=CJK,RawFeature=vertical]{ipamp.ttf}  %% sans
 
 
-
-\fontsize{24}{24}
-
 %% this counter only puts page numbers on each pair of pages, so each yoji gets its own number
 
 \newcounter{mycounter}
 \cfoot{ \ifthenelse {\isodd {\value{page}}\and \value{page}>1}{\themycounter}{}}
-
-%% for rotating the ichis 
-%% the vspace keeps the verticle ichi from crashing into text above and below
-%% when using the command stick, make sure there is a space after like this:
-%%  \stick{一} 鰐 .... put space after bracket and before next char!
-\newcommand\stick[1]{{\CJKfamily{cjk-vert}#1\vspace{2em}}}
 
 \newcommand{\definitionpage}[4]
 %%% 1. kanji, 2. hiragana, 3. definition, 4. optional notes
@@ -57,7 +47,6 @@
 \yojipage{#1}
 }
 
-
 \newcommand{\yojipage}[1]
 %% for pages with the kanji
 {
@@ -66,13 +55,12 @@
 
 \fontsize{32}{32}
 \begin{minipage}{0.5\textwidth}
-%\begin{spacing}{1.125}
+\linespread{1.1}
+\selectfont
 #1
-%\end{spacing}
 \end{minipage}
 \end{center}
 }
-
 
 \newcommand{\signaturepadding} 
 %% adds pages to pad out the final signature
