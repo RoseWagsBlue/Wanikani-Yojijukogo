@@ -1,6 +1,8 @@
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesPackage{yojibook}
 
+%% contains commands for typesetting little books of yojijukugo
+
 \usepackage[paperheight=74mm,paperwidth=52mm]{geometry}
 \usepackage{xeCJK}
 \usepackage{fontspec}
@@ -26,14 +28,16 @@
 
 \fontsize{24}{24}
 
-
+%% this counter only puts page numbers on each pair of pages, so each yoji gets its own number
 
 \newcounter{mycounter}
 \cfoot{ \ifthenelse {\isodd {\value{page}}\and \value{page}>1}{\themycounter}{}}
 
-%\newcommand{\stick}{\rotatebox[origin=br]{90}{\raisebox{0ex}{ー}}}
-%%\newcommand{\stick}{\scalebox{-1}[1]{\rotatebox[origin=c]{90}{ー}\hspace{0.75em}}}
-\newcommand{\stick}{\CJKfamily{cjk-vert}{一}}
+%% for rotating the ichis 
+%% the vspace keeps the verticle ichi from crashing into text above and below
+%% when using the command stick, make sure there is a space after like this:
+%%  \stick{一} 鰐 .... put space after bracket and before next char!
+\newcommand\stick[1]{{\CJKfamily{cjk-vert}#1\vspace{2em}}}
 
 \newcommand{\definitionpage}[4]
 %%% 1. kanji, 2. hiragana, 3. definition, 4. optional notes
@@ -41,7 +45,7 @@
 \newpage
 \CJKfamily{Script=CJK}
 \stepcounter{mycounter}
-\fontsize{11}{11}
+\fontsize{10}{10}
 \noindent
 #2
 \newline
@@ -55,11 +59,12 @@
 
 
 \newcommand{\yojipage}[1]
+%% for pages with the kanji
 {
 \begin{center}
 \newpage
 
-\fontsize{36}{36}
+\fontsize{32}{32}
 \begin{minipage}{0.5\textwidth}
 %\begin{spacing}{1.125}
 #1
